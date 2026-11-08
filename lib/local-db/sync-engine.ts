@@ -223,7 +223,7 @@ async function reconcileSyncResponse({
         response.acknowledgedOperationIds.includes(operationAtRequest.id),
     );
     const localChangedDuringRequest =
-      currentDocument.updatedAt !== documentAtRequest.updatedAt;
+      currentDocument.content !== documentAtRequest.content;
     let nextContent = response.document.content;
     let pendingPatch: TextPatch | null = null;
     let localConflict = false;

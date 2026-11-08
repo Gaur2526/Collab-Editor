@@ -4,7 +4,7 @@ import { LoginForm } from "./login-form";
 export default async function LoginPage({
   searchParams,
 }: {
-  searchParams: Promise<{ registered?: string }>;
+  searchParams: Promise<{ registered?: string; returnTo?: string }>;
 }) {
   const params = await searchParams;
 
@@ -23,7 +23,7 @@ export default async function LoginPage({
         </p>
       ) : null}
 
-      <LoginForm />
+      <LoginForm returnTo={params.returnTo} />
 
       <p className="mt-6 text-center text-sm text-zinc-600">
         No account yet?{" "}

@@ -5,7 +5,7 @@ import { loginAction, type LoginState } from "./actions";
 
 const initialState: LoginState = {};
 
-export function LoginForm() {
+export function LoginForm({ returnTo }: { returnTo?: string }) {
   const [state, formAction, pending] = useActionState(loginAction, initialState);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -18,6 +18,7 @@ export function LoginForm() {
       ) : null}
 
       <form action={formAction} className="mt-6 space-y-4">
+        {returnTo ? <input type="hidden" name="returnTo" value={returnTo} /> : null}
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-zinc-700">
             Email

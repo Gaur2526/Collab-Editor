@@ -21,11 +21,13 @@ export async function loginAction(
     return { error: parsed.error.issues[0]?.message ?? "Invalid input" };
   }
 
+  const returnTo = getSafeReturnTo(formData.get("returnTo"));
+
   try {
     await signIn("credentials", {
       email: parsed.data.email,
       password: parsed.data.password,
-      redirectTo: "/dashboard",
+      redirectTo: returnTo,
     });
   } catch (error) {
     if (error instanceof AuthError) {
@@ -35,4 +37,17 @@ export async function loginAction(
   }
 
   return {};
+}
+
+function getSafeReturnTo(value: FormDataEntryValue | null) {
+  if (typeof value !== "string" || !value.startsWith("/") || value.startsWith("//")) {
+    return "/dashboard";
+  }
+
+  try {
+    const url = new URL(value, "http://localhost");
+    return url.origin === "http://localhost" ? `${url.pathname}${url.search}${url.hash}` : "/dashboard";
+  } catch {
+    return "/dashboard";
+  }
 }
