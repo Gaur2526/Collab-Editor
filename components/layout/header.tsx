@@ -3,7 +3,7 @@ import { AuthNav } from "@/components/auth/auth-nav";
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-20 border-b border-white/70 bg-white/80 backdrop-blur-xl">
+    <header className="sticky top-0 z-20 border-b border-white/60 bg-white/45 backdrop-blur-2xl backdrop-saturate-150">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link
           href="/"
